@@ -38,4 +38,9 @@ public class ServicoController {
         servicoService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PutMapping
+    public ResponseEntity<Servico> update(@RequestBody Servico entity) {
+        return new ResponseEntity<Servico>(servicoService.save(entity),HttpStatus.OK);
+    }
 }

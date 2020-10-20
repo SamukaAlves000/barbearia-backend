@@ -1,8 +1,12 @@
 package com.samuel.barbearia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_SERVICO")
@@ -17,4 +21,10 @@ public class Servico {
     private double preco;
     @Column(nullable = false)
     private byte duracao;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "servicos")
+    Set<Funcionario> funcionarios;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "servicos")
+    Set<Atendimento> atendimentos;
 }
