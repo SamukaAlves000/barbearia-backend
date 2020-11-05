@@ -1,5 +1,6 @@
 package com.samuel.barbearia.controller;
 
+import com.samuel.barbearia.dto.ServicoDto;
 import com.samuel.barbearia.model.Servico;
 import com.samuel.barbearia.service.ServicoService;
 import org.springframework.http.HttpStatus;
@@ -19,18 +20,18 @@ public class ServicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Servico>> findAll() {
-        return new ResponseEntity<List<Servico>>(servicoService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<ServicoDto>> findAll() {
+        return new ResponseEntity<List<ServicoDto>>(servicoService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<Servico> findById(@PathVariable Integer id) {
-        return new ResponseEntity<>(servicoService.findById(id).get(), HttpStatus.OK);
+    public ResponseEntity<ServicoDto> findById(@PathVariable Integer id) {
+        return new ResponseEntity<>(servicoService.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Servico> save(@RequestBody Servico entity) {
-        return new ResponseEntity<Servico>(servicoService.save(entity),HttpStatus.OK);
+    public ResponseEntity<ServicoDto> save(@RequestBody ServicoDto servicoDto) {
+        return new ResponseEntity<ServicoDto>(servicoService.save(servicoDto),HttpStatus.OK);
     }
 
     @DeleteMapping(value = "{id}")
@@ -40,7 +41,7 @@ public class ServicoController {
     }
 
     @PutMapping
-    public ResponseEntity<Servico> update(@RequestBody Servico entity) {
-        return new ResponseEntity<Servico>(servicoService.save(entity),HttpStatus.OK);
+    public ResponseEntity<ServicoDto> update(@RequestBody ServicoDto servicoDto) {
+        return new ResponseEntity<ServicoDto>(servicoService.save(servicoDto),HttpStatus.OK);
     }
 }

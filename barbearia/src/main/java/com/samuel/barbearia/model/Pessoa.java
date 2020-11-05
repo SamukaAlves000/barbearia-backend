@@ -1,17 +1,20 @@
 package com.samuel.barbearia.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "TB_PESSOA")
 @Data
-public class Pessoa {
+public class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,9 +30,10 @@ public class Pessoa {
     private char sexo;
     private LocalDate dataNascimento;
     private String caminhoFoto;
-    @JsonBackReference // ok
+    @JsonIgnore
     @OneToMany(mappedBy = "pessoa")
-    private Set<Atendimento> atendimentos;
+    private List<Atendimento> atendimentos;
     @OneToOne(mappedBy = "pessoa",cascade ={CascadeType.PERSIST,CascadeType.MERGE})
+    @JsonIgnore
     private Funcionario funcionario;
 }
